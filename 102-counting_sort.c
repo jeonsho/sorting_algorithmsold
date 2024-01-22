@@ -19,45 +19,34 @@ void counting_sort(int *array, size_t size)
 	for (i = 0; i < size; i++)
 	{
 		if (array[i] > k)
-			k = array[i];
-	}
-
-	count_array = malloc((k + 1) *sizeof(int));
+			k = array[i]; }
+	count_array = malloc((k + 1) * sizeof(int));
 	if (!count_array)
 		return;
-
 	for (i = 0; i <= (size_t) k; i++)
 		count_array[i] = 0;
 	for (i = 0; i < size; i++)
 		count_array[array[i]]++;
-
 	for (i = 1; i <= (size_t) k; i++)
 		count_array[i] += count_array[i - 1];
-
 	for (i = 0; i <= (size_t) k; i++)
 	{
 		printf("%d", count_array[i]);
 		if (i < (size_t) k)
-			printf(", ");
-	}
-
+			printf(", "); }
 	printf("\n");
-	output_array = malloc(size* sizeof(int));
+	output_array = malloc(size * sizeof(int));
 	if (!output_array)
 	{
 		free(count_array);
-		return;
-	}
-
+		return; }
 	for (i = 0; i < size; i++)
 	{
 		output_array[count_array[array[i]] - 1] = array[i];
 		count_array[array[i]]--;
 	}
-
 	for (i = 0; i < size; i++)
 		array[i] = output_array[i];
-
 	free(count_array);
 	free(output_array);
 }
